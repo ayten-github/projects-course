@@ -4,9 +4,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class ShipBattle {
+    private static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
         char[][] schema = new char[5][5];
-        Scanner scanner = new Scanner(System.in);
         Random random = new Random();
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -17,17 +18,8 @@ public class ShipBattle {
         int colmn = random.nextInt(5) + 1;
         System.out.println("All set. Get ready to rumble!");
         while (true) {
-            int num1, num2;
-            while (true) {
-                System.out.println("Enter a number(1-5)");
-                num1 = scanner.nextInt();
-                if (num1 <= 5 && num1 >= 1) break;
-            }
-            while (true) {
-                System.out.println("Enter a number(1-5)");
-                num2 = scanner.nextInt();
-                if (num2 >= 1 && num2 <= 5) break;
-            }
+            int num1=getValidInput();
+            int num2=getValidInput();
             if (num1 == row && num2 == colmn) {
                 System.out.println("You won!");
                 schema[num1 - 1][num2 - 1] = 'x';
@@ -39,6 +31,16 @@ public class ShipBattle {
                 printingSchema(schema);
             }
         }
+    }
+    private static int getValidInput(){
+        int num;
+        while (true){
+            System.out.println("Enter a number (1-5): ");
+            num=scanner.nextInt();
+            if (num>=1&&num<=5) break;
+            System.out.println("Invalid value.Pls enter again");
+
+        }return num;
     }
     private static void printingSchema(char[][] array) {
         for (int i = 0; i <= 5; i++) {
