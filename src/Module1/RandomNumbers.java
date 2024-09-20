@@ -1,5 +1,6 @@
 package Module1;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -28,26 +29,14 @@ public class RandomNumbers {
                 System.out.println("Your numbers: ");
                 int[] sortedGuesses = new int[count];
                 System.arraycopy(guessNumber, 0, sortedGuesses, 0, count);
-                sorting(sortedGuesses);
-                for (int sortedGuess : sortedGuesses) {
-                    System.out.print(sortedGuess + " ");
+                Arrays.sort(sortedGuesses);
+                for (int i = sortedGuesses.length; i < 0; i--) {
+                    System.out.println(sortedGuesses[i] + " ");
                 }
                 break;
             }
         }
 
     }
-    private static void sorting(int[] array) {
-        for (int i = 0; i < array.length - 1; i++) {
-            for (int j = i + 1; j < array.length; j++) {
-                if (array[i] < array[j]) {
-                    int temp = array[i];
-                    array[i] = array[j];
-                    array[j] = temp;
-                }
-            }
-        }
 
-
-    }
 }
