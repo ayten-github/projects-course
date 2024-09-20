@@ -23,12 +23,12 @@ public class ShipBattle {
             if (num1 == row && num2 == colmn) {
                 System.out.println("You won!");
                 schema[num1 - 1][num2 - 1] = 'x';
-                printingSchema(schema);
+                printSchema(schema);
                 break;
             } else {
                 schema[num1 - 1][num2 - 1] = '*';
                 System.out.println("Try again pls");
-                printingSchema(schema);
+                printSchema(schema);
             }
         }
     }
@@ -45,7 +45,7 @@ public class ShipBattle {
         return num;
     }
 
-    private static void printingSchema(char[][] array) {
+    private static void printSchema(char[][] array) {
         for (int i = 0; i <= 5; i++) {
             System.out.print(i + " | ");
         }
