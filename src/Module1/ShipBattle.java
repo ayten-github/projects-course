@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class ShipBattle {
     private static Scanner scanner = new Scanner(System.in);
     private static char[][] schema = new char[5][5];
+
     public static void main(String[] args) {
         Random random = new Random();
         initializeSchema();
@@ -27,13 +28,15 @@ public class ShipBattle {
             }
         }
     }
-    private static void initializeSchema(){
-        for (int i=0;i<5;i++){
-            for (int j=0;j<5;j++){
-                schema[i][j]='-';
+
+    private static void initializeSchema() {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                schema[i][j] = '-';
             }
         }
     }
+
     private static int getValidInput() {
         int num;
         while (true) {
