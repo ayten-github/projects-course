@@ -1,5 +1,7 @@
 package Module1;
 
+import java.util.Comparator;
+
 public class Student implements Comparable<Student> {
     private final int id;
     private final String name;
@@ -42,15 +44,7 @@ public class Student implements Comparable<Student> {
 
     @Override
     public int compareTo(Student student) {
-        int compare = Double.compare(student.score, this.score);
-        if (compare != 0) return compare;
-        if (this.gender != student.gender) {
-            return this.gender ? -1 : 1;
-        }
-        if (this.age != student.age) return Integer.compare(student.age, this.age);
-        if (this.name.equalsIgnoreCase(student.name)) return -1 * (this.name.compareTo(student.name));
         return Integer.compare(this.id, student.id);
-
     }
 
 }

@@ -30,21 +30,22 @@ public class RandomNumbers {
                 int[] sortedGuesses = new int[count];
                 System.arraycopy(guessNumber, 0, sortedGuesses, 0, count);
                 Arrays.sort(sortedGuesses);
-                reverseFunction(sortedGuesses);
+                reverseArray(sortedGuesses);
                 break;
             }
 
         }
 
     }
-    public static void reverseFunction(int arr[]){
+
+    public static void reverseArray(int arr[]) {
         int reversedNumber;
-        int n=arr.length;
-        for (int i=0;i<n/2;i++){
-            reversedNumber=arr[i];
-            arr[i]=arr[n-1-i];
-            arr[n-1-i]=reversedNumber;
+        int n = arr.length;
+        for (int i = 0; i < n / 2; i++) {
+            reversedNumber = arr[i];
+            arr[i] = arr[n - 1 - i];
+            arr[n - 1 - i] = reversedNumber;
         }
-        for (int i=0;i<n;i++) System.out.print(arr[i]+" ");
+        for (int i = 0; i < n; i++) System.out.print(arr[i] + " ");
     }
 }
