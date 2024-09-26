@@ -11,7 +11,7 @@ public class RandomNumbers {
         System.out.println("Enter your name: ");
         String name = scanner.nextLine();
         System.out.println("Let the begin");
-        int number = random.nextInt(100);
+        int number = random.nextInt(101);
         int[] guessNumber = new int[100];
         int count = 0;
         while (true) {
@@ -30,13 +30,21 @@ public class RandomNumbers {
                 int[] sortedGuesses = new int[count];
                 System.arraycopy(guessNumber, 0, sortedGuesses, 0, count);
                 Arrays.sort(sortedGuesses);
-                for (int i = sortedGuesses.length; i < 0; i--) {
-                    System.out.println(sortedGuesses[i] + " ");
-                }
+                reverseFunction(sortedGuesses);
                 break;
             }
+
         }
 
     }
-
+    public static void reverseFunction(int arr[]){
+        int reversedNumber;
+        int n=arr.length;
+        for (int i=0;i<n/2;i++){
+            reversedNumber=arr[i];
+            arr[i]=arr[n-1-i];
+            arr[n-1-i]=reversedNumber;
+        }
+        for (int i=0;i<n;i++) System.out.print(arr[i]+" ");
+    }
 }

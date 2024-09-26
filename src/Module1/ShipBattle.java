@@ -5,15 +5,10 @@ import java.util.Scanner;
 
 public class ShipBattle {
     private static Scanner scanner = new Scanner(System.in);
-
+    private static char[][] schema = new char[5][5];
     public static void main(String[] args) {
-        char[][] schema = new char[5][5];
         Random random = new Random();
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                schema[i][j] = '-';
-            }
-        }
+        initializeSchema();
         int row = random.nextInt(5) + 1;
         int colmn = random.nextInt(5) + 1;
         System.out.println("All set. Get ready to rumble!");
@@ -32,7 +27,13 @@ public class ShipBattle {
             }
         }
     }
-
+    private static void initializeSchema(){
+        for (int i=0;i<5;i++){
+            for (int j=0;j<5;j++){
+                schema[i][j]='-';
+            }
+        }
+    }
     private static int getValidInput() {
         int num;
         while (true) {
