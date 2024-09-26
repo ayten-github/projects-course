@@ -16,7 +16,7 @@ public class RandomNumbers {
         int count = 0;
         while (true) {
 
-            System.out.println("enter your number");
+            System.out.println("Enter your number");
             int guess = scanner.nextInt();
             if (count < guessNumber.length) {
                 guessNumber[count] = guess;

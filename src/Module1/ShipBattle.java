@@ -12,7 +12,7 @@ public class ShipBattle {
         initializeSchema();
         int row = random.nextInt(5) + 1;
         int colmn = random.nextInt(5) + 1;
-        System.out.println("All set. Get ready to rumble!");
+        System.out.println("All set.Get ready to rumble!");
         while (true) {
             int num1 = getValidInput();
             int num2 = getValidInput();
