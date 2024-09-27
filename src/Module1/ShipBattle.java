@@ -10,19 +10,19 @@ public class ShipBattle {
     public static void main(String[] args) {
         Random random = new Random();
         initializeSchema();
-        int row = random.nextInt(5) + 1;
-        int colmn = random.nextInt(5) + 1;
+        int targetRow = random.nextInt(5);
+        int colmn = random.nextInt(5);
         System.out.println("All set.Get ready to rumble!");
         while (true) {
             int num1 = getValidInput();
             int num2 = getValidInput();
-            if (num1 == row && num2 == colmn) {
+            if (num1 == targetRow&& num2 == colmn) {
                 System.out.println("You won!");
-                schema[num1 - 1][num2 - 1] = 'x';
+                schema[num1][num2] = 'x';
                 printSchema(schema);
                 break;
             } else {
-                schema[num1 - 1][num2 - 1] = '*';
+                schema[num1][num2] = '*';
                 System.out.println("Try again pls");
                 printSchema(schema);
             }
