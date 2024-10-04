@@ -165,8 +165,8 @@ class LinkedList<T> {
         System.out.println(ll);
         ll.delete("char");
         System.out.println(ll);
-        ll.removeTail();
-        System.out.println(ll);
+       // ll.removeTail();
+     //   System.out.println(ll);
         ll.delete("byte");
         System.out.println(ll);
     }
