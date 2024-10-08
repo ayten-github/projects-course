@@ -9,7 +9,7 @@ public class TicTacToe {
     public static void main(String[] args) {
         while (true){
             printBoard();
-            movePlaces();
+            getValidInput();
             if(checkWinner()){
                 printBoard();
                 System.out.println("You win,"+signer);
@@ -33,7 +33,7 @@ public class TicTacToe {
         }
     }
 
-    private static void movePlaces() {
+    private static void getValidInput() {
         Scanner scanner = new Scanner(System.in);
         int row,column;
         while (true) {

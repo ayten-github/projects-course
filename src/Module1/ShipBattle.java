@@ -11,18 +11,18 @@ public class ShipBattle {
         Random random = new Random();
         initializeSchema();
         int targetRow = random.nextInt(5);
-        int colmn = random.nextInt(5);
+        int targetColumn = random.nextInt(5);
         System.out.println("All set.Get ready to rumble!");
         while (true) {
-            int num1 = getValidInput();
-            int num2 = getValidInput();
-            if (num1 == targetRow&& num2 == colmn) {
+            int row = getValidInput();
+            int column = getValidInput();
+            if (row == targetRow&& column == targetColumn) {
                 System.out.println("You won!");
-                schema[num1][num2] = 'x';
+                schema[row][column] = 'x';
                 printSchema(schema);
                 break;
             } else {
-                schema[num1][num2] = '*';
+                schema[row][column] = '*';
                 System.out.println("Try again pls");
                 printSchema(schema);
             }

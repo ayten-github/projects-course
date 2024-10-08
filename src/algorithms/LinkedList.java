@@ -1,123 +1,131 @@
 package algorithms;
 
-class LinkedList<T> {
-    public Node<T> head;
+import org.junit.Before;
+import org.junit.Test;
 
-    public LinkedList() {
-        this.head = null;
-    }
+import java.nio.file.OpenOption;
+import java.util.Optional;
 
-    public void addHead(T value) {
+public class LinkedList<T> {
+
+    private Node<T> head;
+    private int size;
+
+    public Node<T> addHead(final T value) {
         Node<T> node = new Node<>(value);
         node.next = head;
         head = node;
+        size++;
+        return node;
     }
 
-    public void addTail(T value) {
-        Node<T> node = new Node<>(value);
-        if (head == null) head = node;
-        else {
-            Node<T> tNode = head;
-            while (tNode.next != null) {
-                tNode = tNode.next;
-            }
+    public Node<T> addTail(T value) {
+        final Node<T> node = new Node<>(value);
+        Node<T> current = head;
+        size++;
+        if (head == null) {
+            head = node;
+            return head;
         }
+        while (current.next != null) {
+            current = current.next;
+        }
+        current.next = node;
+        return current;
     }
 
-    public void removeTail() {
-        if (head == null) return;
-        if (head.next == null) head = null;
+    public Optional<T> removeTail() {
+        if (head == null) return Optional.empty();
+        if (head.next == null) {
+            head = null;
+            return Optional.ofNullable(null);
+        }
         Node<T> tNode = head;
         while (tNode.next.next != null) {
             tNode = tNode.next;
         }
+        T removed = tNode.next.value;
         tNode.next = null;
+        size--;
+        return Optional.of(removed);
     }
 
-    public void removeHead() {
-        if (head == null) return;
+    public Optional<T> removeHead() {
+        if (head == null) return Optional.empty();
+        T removed = head.value;
         head = head.next;
+        size--;
+        return Optional.of(removed);
     }
 
-    public void insert(int index, T value) {
+    public Optional<T> insert(int index, final T value) {
         Node<T> tNode = new Node<>(value);
-        if (index < 0) System.out.println("There is no such a index");
+        if (index < 0 || index < size) return Optional.empty();
         if (index == 0) {
-            tNode.next = head;
-            head = tNode;
-            return;
+            addHead(value);
+            return Optional.of(value);
         }
         Node<T> current = head;
         for (int i = 0; i < index - 1; i++) {
-            if (current == null) {
-                throw new IndexOutOfBoundsException("Index out of bounds");
-            }
             current = current.next;
         }
-        if (current != null) tNode.next = current.next;
-        else tNode.next = null;
-        if (current != null) current.next = tNode;
-        else addTail(value);
-
+        tNode.next = current.next;
+        current.next = tNode;
+        return Optional.of(current.value);
     }
 
-    public int size() {
-        int count = 0;
-        Node<T> current = head;
-        while (current != null) {
-            count++;
-            current = current.next;
-        }
-        return count;
-    }
-
-    public void update(int index, T value) {
-        Node<T> current = head;
+    public boolean update(int index, final T value) {
+        if (index < 0 || index >= size) return false;
+        Node<T> tNode = head;
         for (int i = 0; i < index; i++) {
-            if (current == null) throw new IndexOutOfBoundsException("index out of bound");
-            current = current.next;
+            tNode = tNode.next;
         }
-        if (current != null) current.value = value;
-        else throw new IndexOutOfBoundsException("index out of bound");
+        tNode.value = value;
+        return true;
     }
 
-    public void delete(int index) {
+    public boolean delete(final int index) {
+        if (index < 0 || index >= size) {
+            System.out.println("not valid input");
+            return false;
+        }
         if (head == null) {
             System.out.println("your list is empty pls add something");
-            return;
+            return false;
         }
-        if (index == 0) head = head.next;
-        if (index < 0) {
-            System.out.println("index can't be negative");
-            return;
+        if (index == 0) {
+            head = head.next;
+            return true;
         }
         Node<T> current = head;
         for (int i = 0; i < index - 1; i++) {
-            if (current == null) {
-                throw new IndexOutOfBoundsException("index out or bound");
-            }
             current = current.next;
         }
-        if (current.next != null) current.next = current.next.next;
-        else throw new IndexOutOfBoundsException();
+        current.next = current.next.next;
+        size--;
+        return true;
     }
 
-    public void delete(T value) {
-        if (head == null) System.out.println("list is empty pls add something");
+    public boolean delete(final T value) {
+        if (head == null) {
+            System.out.println("list is empty pls add something");
+            return false;
+        }
         if (head.value.equals(value)) {
             head = head.next;
-            return;
+            size--;
+            return true;
         }
         Node<T> current = head;
         while (current.next != null) {
             if (current.next.value.equals(value)) {
                 current.next = current.next.next;
-                return;
+                size--;
+                return true;
             }
             current = current.next;
         }
-        System.out.println("there is not such a value");
-
+        return false;
     }
 
     public void deleteAll() {
@@ -125,11 +133,11 @@ class LinkedList<T> {
     }
 
     public Object[] toArray() {
-        Object[] array = new Object[size()];
+        Object[] array = new Object[size];
         int sizeOfArray = 0;
         Node<T> tNode = head;
         while (tNode.next != null) {
-            array[sizeOfArray++] = tNode;
+            array[sizeOfArray++] = tNode.value;
             tNode = tNode.next;
         }
         return array;
@@ -154,10 +162,8 @@ class LinkedList<T> {
         System.out.println(ll);
         ll.addTail("short");
         System.out.println(ll);
-        ll.delete(2);
+        System.out.println(ll.delete(2));
         System.out.println(ll);
-        System.out.println(ll.size());
-        ll.removeHead();
         System.out.println(ll);
         ll.insert(1, "char");
         System.out.println(ll);
@@ -169,6 +175,16 @@ class LinkedList<T> {
         //   System.out.println(ll);
         ll.delete("byte");
         System.out.println(ll);
+    }
+
+    @Before
+    public void setUp() {
+
+    }
+
+    @Test
+    public void addLinkedListShouldReturnSuccess() {
+
     }
 }
 
